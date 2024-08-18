@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Welcome to Ilahi App</h1>
-    <p>Explore our collection of spiritual songs</p>
+    <p>Explore our collection of sacred songs</p>
     <router-link to="/songs">View Song List</router-link>
   </div>
 </template>

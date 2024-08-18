@@ -7,7 +7,7 @@ export const useSongStore = defineStore('song', () => {
 
   async function fetchSongs() {
     try {
-      const response = await fetch('http://localhost:3000/read-song')
+      const response = await fetch('https://raw.githubusercontent.com/yashineonline/ilahi/main/ilahi.txt')
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`)
       }
