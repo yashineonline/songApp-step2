@@ -1,14 +1,33 @@
 import jsPDF from 'jspdf';
 import { SongData } from './songProcessor';
 
-export function generateSingleSongPDF(song: SongData): void {
+export function generateSingleSongPDF(song: SongData, qrCodeDataUrl: string): void {
   const doc = new jsPDF();
+
   doc.setFontSize(16);
   doc.text(song.title, 20, 20);
+
   doc.setFontSize(12);
-  song.lyrics.forEach((stanza, index) => {
-    doc.text(stanza.join('\n'), 20, 40 + (index * 30));
-  });
+  doc.text('Lyrics:', 20, 30);
+  doc.setFontSize(10);
+  const lyricsText = song.lyrics.map(stanza => stanza.join('\n')).join('\n\n');
+  const lyricsLines = doc.splitTextToSize(lyricsText, 170);
+  doc.text(lyricsLines, 20, 40);
+
+  const translationY = 40 + (lyricsLines.length * 5);
+  doc.setFontSize(12);
+  doc.text('Translation:', 20, translationY);
+  doc.setFontSize(10);
+  const translationText = song.translation.map(stanza => stanza.join('\n')).join('\n\n');
+  const translationLines = doc.splitTextToSize(translationText, 170);
+  doc.text(translationLines, 20, translationY + 10);
+
+  const linkY = translationY + 10 + (translationLines.length * 5);
+  doc.setFontSize(12);
+  doc.textWithLink('Watch on YouTube', 20, linkY, { url: song.youtubeLink });
+
+  doc.addImage(qrCodeDataUrl, 'PNG', 20, linkY + 10, 50, 50);
+
   doc.save(`${song.title}.pdf`);
 }
 
