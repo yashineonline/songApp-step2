@@ -1,6 +1,7 @@
 
 priority
 to make zoom functionality an util and then add to SongDisplay, right now it is at bottom of it
+songList hyperlink of all songs to SongDisplay
 
 question
 why the link of the new build links up to the one that is supposed to be the other repo? find out
