@@ -1,1 +1,2 @@
 why the link of the new build links up to the one that is supposed to be the other repo? find out
+convert pdf to txt or extract words from pdf and recognize where song begins and ends
