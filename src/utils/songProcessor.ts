@@ -35,4 +35,20 @@ export function processSongsFile(fileContent: string): SongData[] {
   });
 }
 
+export function processSongsFile(fileContent: string): SongData[] {
+  const songs = fileContent.split('\n\n\n').map(songText => {
+    const lines = songText.split('\n');
+    const title = lines[0].trim();
+    const lyrics = lines.slice(1).reduce((acc, line) => {
+      if (line.trim() === '') {
+        acc.push([]);
+      } else {
+        acc[acc.length - 1].push(line.trim());
+      }
+      return acc;
+    }, [[]]);
+    return { title, lyrics, translation: [], youtubeLink: '', isUnderEdit: false };
+  });
+  return songs.sort((a, b) => a.title.localeCompare(b.title));
+}
 

@@ -29,6 +29,10 @@
     </div>
     <div v-else>Loading song...</div>
   </div>
+  <div class="mt-4 text-center text-sm">
+    This app is maintained by the AQRT. Your donations are most welcome. 
+    <a href="https://aqrtsufi.org" target="_blank" class="text-blue-600 hover:underline">Visit aqrtsufi.org</a>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -57,4 +61,31 @@ onMounted(async () => {
     qrCodeDataUrl.value = await generateQRCode(currentSong.value.youtubeLink)
   }
 })
+</script>
+
+<template>
+  <div class="container mx-auto p-4">
+    <!-- ... existing code ... -->
+    <div class="mb-4">
+      <button @click="decreaseFont" class="btn btn-sm">A-</button>
+      <button @click="increaseFont" class="btn btn-sm ml-2">A+</button>
+    </div>
+    <div :style="{ fontSize: `${fontSize}px` }">
+      <!-- ... lyrics display ... -->
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue';
+
+const fontSize = ref(16);
+
+const increaseFont = () => {
+  fontSize.value += 2;
+};
+
+const decreaseFont = () => {
+  fontSize.value = Math.max(12, fontSize.value - 2);
+};
 </script>
